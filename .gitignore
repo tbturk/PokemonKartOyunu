@@ -21,3 +21,10 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/PokemonKartOyunu/nbproject/private/
+/PokemonKartOyunu/build/
+/Kaynak_kodlar/build/
+/sourceCodes/build/
+/sourceCodes/nbproject/private/
+/source_Codes/build/
+/source_Codes/nbproject/private/
