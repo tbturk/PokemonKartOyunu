@@ -8,7 +8,7 @@
  *
  * @author bthn0
  */
-public class Pokemon {
+public abstract class Pokemon {//   superclass
 
     private int pokemonID;
     private String pokemonAdi;
@@ -48,4 +48,9 @@ public class Pokemon {
     public void setPokemonTip(String pokemonTip) {
         this.pokemonTip = pokemonTip;
     }
+    
+    
+
+    abstract void hasarPuaniGoster();
+    
 }

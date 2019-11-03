@@ -8,6 +8,18 @@
  *
  * @author bthn0
  */
-public class BilgisayarOyuncusu {
+public class BilgisayarOyuncusu extends Oyuncu{//   subClass
+
+    public BilgisayarOyuncusu(String oyuncuAdi, int oyuncuID, int skor) {
+        super(oyuncuAdi, oyuncuID, skor);
+    }
+
+    @Override
+    void kartSec() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    
     
 }
