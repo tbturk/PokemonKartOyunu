@@ -64,6 +64,6 @@ public abstract class Oyuncu {// superclass
         System.out.println(this.oyuncuAdi + "Adlı Kullanıcının Skoru" + getSkor());
     }
 
-    abstract void kartSec();  // oyuncu ve bilgisayar için overRide edilecek.
+    abstract String kartSec();  // oyuncu ve bilgisayar için overRide edilecek.
 
 }
