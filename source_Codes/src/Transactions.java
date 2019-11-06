@@ -1,6 +1,8 @@
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.ImageIcon;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,9 +13,13 @@ import java.util.Random;
  *
  * @author bthn0
  */
-public class AnaEkran {
+public class Transactions {
 
-    public static void basKartAta(ArrayList<Integer> kullanilanKartlar, ArrayList<Pokemon> pokemon, Oyuncu oyuncu) {
+    ArrayList<Pokemon> pokemon = new ArrayList<>();
+    ArrayList<Integer> kullanilanKartlar = new ArrayList<>();
+    ArrayList<ImageIcon> kartIkon = new ArrayList<>();
+
+    public void basKartAta(ArrayList<Integer> kullanilanKartlar, ArrayList<Pokemon> pokemon, Oyuncu oyuncu) {
         Random random = new Random();
         for (int j = 0; j < 3; j++) {
             int ayniMi = 1;// aynı kartın bir daha seçilmemesi için
@@ -32,7 +38,7 @@ public class AnaEkran {
         }
     }
 
-    public static void yeniKart(ArrayList<Integer> kullanilanKartlar, ArrayList<Pokemon> pokemon, Oyuncu oyuncu) {
+    public void yeniKart(ArrayList<Integer> kullanilanKartlar, ArrayList<Pokemon> pokemon, Oyuncu oyuncu) {
         Random random = new Random();
         for (int i = 0; i < 3; i++) {
             if (oyuncu.kartListesi[i].equalsIgnoreCase(" ")) {
@@ -54,7 +60,7 @@ public class AnaEkran {
 
     }
 
-    public static int kartBittiMi(Oyuncu oyuncu) {
+    public int kartBittiMi(Oyuncu oyuncu) {
         int toplam = 0;
         for (int i = 0; i < 3; i++) {
             if (oyuncu.kartListesi[i].equalsIgnoreCase(" ")) {
@@ -67,9 +73,7 @@ public class AnaEkran {
         return 0;
     }
 
-    public static void main(String[] args) {
-        ArrayList<Pokemon> pokemon = new ArrayList<>();
-        ArrayList<Integer> kullanilanKartlar = new ArrayList<>();
+    public ArrayList<Pokemon> kartlariOlustur() {
         pokemon.add(new Pikachu("Pikachu", "Elektrik", 40));
         pokemon.add(new Bulbasaur("Bulbasaur", "Çim", 50));
         pokemon.add(new Charmander("Charmander", "Ateş", 60));
@@ -81,25 +85,23 @@ public class AnaEkran {
         pokemon.add(new Jigglypuff("Jigglypuff", "Ses", 70));
         pokemon.add(new Meowth("Meowth", "Normal", 40));
 
-        //pokemon.forEach((n)->System.out.println(n));
-        /*for (int i = 0; i < 10; i++) {
-            System.out.println(pokemon.get(i).getPokemonTip());
-        }*/
-        Oyuncu oyuncu1 = new InsanOyuncusu("Batuhan", 1, 0);
-        //Oyuncu oyuncu2 = new InsanOyuncusu("İbrahim", 2, 0);
-        basKartAta(kullanilanKartlar, pokemon, oyuncu1);
-        //basKartAta(kullanilanKartlar, pokemon, oyuncu2);
-        while (true) {
-            System.out.println(oyuncu1.getOyuncuAdi() + " Adlı Kullanıcı Hamle Yapıyor...\n---------------------------------");
-            oyuncu1.kartSec();
-            if (kullanilanKartlar.size() != 10) {
-                yeniKart(kullanilanKartlar, pokemon, oyuncu1);
-            }
-            if (kartBittiMi(oyuncu1) == 1) {
-                System.out.println("TÜM KARTLAR BİTMİŞTİR OYUN SONLANDIRILIYOR");
-                break;
-            }
-
-        }
+        return pokemon;
     }
+
+    public ArrayList<ImageIcon> kartIkonOlustur() {
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Pikachu.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Bulbasaur.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Charmander.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Squirtle.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Zubat.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Psyduck.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Snorlax.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Butterfree.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Jigglypuff.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Meowth.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Back.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+
+        return kartIkon;
+    }
+
 }
