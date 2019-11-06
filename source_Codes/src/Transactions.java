@@ -1,6 +1,8 @@
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.ImageIcon;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,6 +17,7 @@ public class Transactions {
 
     ArrayList<Pokemon> pokemon = new ArrayList<>();
     ArrayList<Integer> kullanilanKartlar = new ArrayList<>();
+    ArrayList<ImageIcon> kartIkon = new ArrayList<>();
 
     public void basKartAta(ArrayList<Integer> kullanilanKartlar, ArrayList<Pokemon> pokemon, Oyuncu oyuncu) {
         Random random = new Random();
@@ -83,6 +86,22 @@ public class Transactions {
         pokemon.add(new Meowth("Meowth", "Normal", 40));
 
         return pokemon;
+    }
+
+    public ArrayList<ImageIcon> kartIkonOlustur() {
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Pikachu.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Bulbasaur.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Charmander.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Squirtle.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Zubat.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Psyduck.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Snorlax.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Butterfree.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Jigglypuff.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Meowth.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Back.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+
+        return kartIkon;
     }
 
 }
