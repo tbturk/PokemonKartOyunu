@@ -13,7 +13,7 @@ public abstract class Oyuncu {// superclass
     private String oyuncuAdi;
     private int oyuncuID;
     private int skor;
-    public String kartListesi[] = new String[3];
+    public String kartListesi[][] = new String[3][2];
 
     public Oyuncu(String oyuncuAdi, int oyuncuID, int skor) {
         this.oyuncuAdi = oyuncuAdi;
@@ -49,14 +49,14 @@ public abstract class Oyuncu {// superclass
         this.skor = skor;
     }
 
-    public String[] getKartListesi() {
+    public String[][] getKartListesi() {
         for(int i=0; i<3;i++){
-            System.out.println(kartListesi[i]);
+            System.out.println(kartListesi[i][0]);
         }
         return kartListesi;
     }
 
-    public void setKartListesi(String[] kartListesi) {
+    public void setKartListesi(String[][] kartListesi) {
         this.kartListesi = kartListesi;
     }
 
@@ -64,6 +64,6 @@ public abstract class Oyuncu {// superclass
         System.out.println(this.oyuncuAdi + "Adlı Kullanıcının Skoru" + getSkor());
     }
 
-    abstract String kartSec();  // oyuncu ve bilgisayar için overRide edilecek.
+    abstract int kartSec();  // oyuncu ve bilgisayar için overRide edilecek.
 
 }

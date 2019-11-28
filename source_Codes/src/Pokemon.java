@@ -51,6 +51,6 @@ public abstract class Pokemon {//   superclass
     
     
 
-    abstract void hasarPuaniGoster();
+    abstract int hasarPuaniGoster();
     
 }

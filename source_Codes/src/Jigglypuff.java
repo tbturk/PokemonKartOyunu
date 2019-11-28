@@ -40,8 +40,9 @@ public class Jigglypuff extends Pokemon {//   subClass
     }
 
     @Override
-    public void hasarPuaniGoster() {
+    public int hasarPuaniGoster() {
         System.out.println(getPokemonAdi() + " Adlı Pokemonun Hasar Puanı: " + getHasarPuani());
+        return getHasarPuani();
     }
 
 }
