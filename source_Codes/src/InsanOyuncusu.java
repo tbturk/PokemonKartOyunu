@@ -17,7 +17,7 @@ public class InsanOyuncusu extends Oyuncu {//   subClass
     }
     
     @Override
-    int kartSec() {
+    int kartSec(String[][] a) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Oyuncunun Sahip Olduğu Kartlar:");
         getKartListesi();

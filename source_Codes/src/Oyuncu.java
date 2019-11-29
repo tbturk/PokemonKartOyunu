@@ -46,7 +46,7 @@ public abstract class Oyuncu {// superclass
     }
 
     public void setSkor(int skor) {
-        this.skor = skor;
+        this.skor += skor;
     }
 
     public String[][] getKartListesi() {
@@ -64,6 +64,6 @@ public abstract class Oyuncu {// superclass
         System.out.println(this.oyuncuAdi + "Adlı Kullanıcının Skoru" + getSkor());
     }
 
-    abstract int kartSec();  // oyuncu ve bilgisayar için overRide edilecek.
+    abstract int kartSec(String[][] a);  // oyuncu ve bilgisayar için overRide edilecek.
 
 }

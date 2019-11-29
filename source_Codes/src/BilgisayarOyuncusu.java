@@ -1,3 +1,6 @@
+
+import java.util.Random;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,9 +18,17 @@ public class BilgisayarOyuncusu extends Oyuncu{//   subClass
     }
 
     @Override
-    int kartSec() {
-        
-        return 0;
+    int kartSec(String[][] a) {
+        int temp;
+        while(true){
+            Random random = new Random();
+            temp = random.nextInt(3);
+            if(a[temp][0].equals(" ")){
+                continue;
+            }
+            break;
+        }
+        return temp;
     }
 
     

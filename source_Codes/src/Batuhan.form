@@ -243,25 +243,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="K2Kart0"/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="kullanici2Kart0MouseClicked"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="kullanici2Kart1">
       <Properties>
         <Property name="text" type="java.lang.String" value="K2Kart1"/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="kullanici2Kart1MouseClicked"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="kullanici2Kart2">
       <Properties>
         <Property name="text" type="java.lang.String" value="K2Kart2"/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="kullanici2Kart2MouseClicked"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="kullanici1TextIsim">
       <Properties>
