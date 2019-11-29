@@ -416,6 +416,18 @@ public class Batuhan extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void raundNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raundNextActionPerformed
+        if((oyuncu1.kartListesi[0][0].equals(" "))&&(oyuncu1.kartListesi[1][0].equals(" "))&&(oyuncu1.kartListesi[2][0].equals(" "))){
+            if (oyuncu1.getSkor() > oyuncu2.getSkor()) {
+                JOptionPane.showMessageDialog(null, "OYUN BİTTİ. "+oyuncu1.getOyuncuAdi()+" kazandı.");
+            }
+            if (oyuncu1.getSkor() < oyuncu2.getSkor()) {
+                JOptionPane.showMessageDialog(null, "OYUN BİTTİ. "+oyuncu2.getOyuncuAdi()+" kazandı.");
+            }
+            if (oyuncu1.getSkor() == oyuncu2.getSkor()) {
+                JOptionPane.showMessageDialog(null, "OYUN BERABERE BİTTİ");
+            }
+            System.exit(0);
+        }
         int secilen1, secilen2;
         if (String.valueOf(oyuncu1.getClass()).equals("class BilgisayarOyuncusu")) {
             secilen1 = oyuncu1.kartSec(oyuncu1.kartListesi);
@@ -494,8 +506,8 @@ public class Batuhan extends javax.swing.JFrame{
                 }
             }
             
-            kullanici1OrtaKart.setIcon(t.kartIkon.get(10));
-            kullanici2OrtaKart.setIcon(t.kartIkon.get(10));
+            //kullanici1OrtaKart.setIcon(t.kartIkon.get(10));
+            //kullanici2OrtaKart.setIcon(t.kartIkon.get(10));
             if (!(oyuncu1.kartListesi[0][0].equals(" "))) {
                 kullanici1Kart0.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[0][1])));
             }
