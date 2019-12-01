@@ -102,7 +102,7 @@ public class Transactions {
         kartIkon.add(new ImageIcon(new ImageIcon("../cards/Jigglypuff.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
         kartIkon.add(new ImageIcon(new ImageIcon("../cards/Meowth.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
         kartIkon.add(new ImageIcon(new ImageIcon("../cards/Back.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
-
+        kartIkon.add(new ImageIcon(new ImageIcon("../cards/Empty.png").getImage().getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
         return kartIkon;
     }
 
