@@ -17,7 +17,7 @@ public class InsanOyuncusu extends Oyuncu {//   subClass
     }
     
     @Override
-    String kartSec() {
+    int kartSec(String[][] a) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Oyuncunun Sahip Olduğu Kartlar:");
         getKartListesi();
@@ -28,15 +28,16 @@ public class InsanOyuncusu extends Oyuncu {//   subClass
             secilenPokemon = scanner.nextLine();
             ayniMi = 1;
             for (int k = 0; k < 3; k++) {
-                if (secilenPokemon.equalsIgnoreCase(kartListesi[k])) {
+                if (secilenPokemon.equalsIgnoreCase(kartListesi[k][0])) {
                     ayniMi = 0;
-                    kartListesi[k]=" ";
+                    kartListesi[k][0]=" ";
                 }
             }            
         }
         System.out.println("Seni seçtim "+secilenPokemon);
         
-        return secilenPokemon;
+        //return secilenPokemon;
+        return 0;
     }
     
 }

@@ -28,14 +28,14 @@ public class AnaEkran {
                 }
             }
             kullanilanKartlar.add(rastgele);
-            oyuncu.kartListesi[j] = pokemon.get(rastgele).getPokemonAdi();
+            oyuncu.kartListesi[j][0] = pokemon.get(rastgele).getPokemonAdi();
         }
     }
 
     public static void yeniKart(ArrayList<Integer> kullanilanKartlar, ArrayList<Pokemon> pokemon, Oyuncu oyuncu) {
         Random random = new Random();
         for (int i = 0; i < 3; i++) {
-            if (oyuncu.kartListesi[i].equalsIgnoreCase(" ")) {
+            if (oyuncu.kartListesi[i][0].equalsIgnoreCase(" ")) {
                 int ayniMi = 1;// aynı kartın bir daha seçilmemesi için
                 int rastgele = 5;
                 while (ayniMi == 1) {
@@ -48,7 +48,7 @@ public class AnaEkran {
                     }
                 }
                 kullanilanKartlar.add(rastgele);
-                oyuncu.kartListesi[i] = pokemon.get(rastgele).getPokemonAdi();
+                oyuncu.kartListesi[i][0] = pokemon.get(rastgele).getPokemonAdi();
             }
         }
 
@@ -57,7 +57,7 @@ public class AnaEkran {
     public static int kartBittiMi(Oyuncu oyuncu) {
         int toplam = 0;
         for (int i = 0; i < 3; i++) {
-            if (oyuncu.kartListesi[i].equalsIgnoreCase(" ")) {
+            if (oyuncu.kartListesi[i][0].equalsIgnoreCase(" ")) {
                 toplam++;
             }
         }
