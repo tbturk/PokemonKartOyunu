@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,17 +19,16 @@ import javax.swing.Timer;
  *
  * @author bthn0
  */
-public class Batuhan extends javax.swing.JFrame{
+public class Batuhan extends javax.swing.JFrame {
 
     Transactions t = new Transactions();
-    Timer timer = new Timer(1000, null);
-    private int time = 0;
     static int mod;
     boolean kullanici1Oynadi;
     boolean kullanici2Oynadi;
     Oyuncu oyuncu1 = null;
     Oyuncu oyuncu2 = null;
     int hasar1, hasar2;
+    String isim;
 
     /**
      * Creates new form Batuhan
@@ -50,7 +50,6 @@ public class Batuhan extends javax.swing.JFrame{
         if (mod == -1) {//kullanıcı seçim yapmadan kapatırsa
             System.exit(0);
         }
-
         t.kartlariOlustur();//pokemon kartları tanımlanıyor.
         t.kartIkonOlustur();//kart resimleri tanımlanıyor.
         if (mod == 0) {
@@ -63,15 +62,16 @@ public class Batuhan extends javax.swing.JFrame{
             kullanici2TextIsim.setText(oyuncu2.getOyuncuAdi());
             kullanici2SkorIsmi.setText(oyuncu2.getOyuncuAdi());
         } else if (mod == 1) {
-            String isim;
             String tmp = null;
             isim = JOptionPane.showInputDialog("Oyuncunun İsmini Girin");
             oyuncu1 = new InsanOyuncusu(isim, 1, 0);
             oyuncu2 = new BilgisayarOyuncusu("Bilgisayar", 2, 0);
-            if (isim == null) {//kullanıcı isim inputu vermeden kapatırsa default değer atıyor.
-                kullanici1Ismi.setText("Kullanıcı-1");
-                kullanici1TextIsim.setText("Kullanici-1");
-                kullanici1SkorIsmi.setText("Kullanici-1");
+            if (isim.equals("") || isim == null) {
+                isim = "Kullanıcı-1";
+                oyuncu1.setOyuncuAdi(isim);
+                kullanici1Ismi.setText(isim);
+                kullanici1TextIsim.setText(isim);
+                kullanici1SkorIsmi.setText(isim);
             } else {
                 kullanici1Ismi.setText(oyuncu1.getOyuncuAdi());
                 kullanici1TextIsim.setText(oyuncu1.getOyuncuAdi());
@@ -87,6 +87,7 @@ public class Batuhan extends javax.swing.JFrame{
         kullanici1Kart0.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[0][1])));
         kullanici1Kart1.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[1][1])));
         kullanici1Kart2.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[2][1])));
+
         //ikonları set ettiğim yer.
         kullanici2Kart0.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[0][1])));
         kullanici2Kart1.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[1][1])));
@@ -95,55 +96,6 @@ public class Batuhan extends javax.swing.JFrame{
         kullanici2OrtaKart.setIcon(t.kartIkon.get(10));
         kalanKartIkon.setIcon(t.kartIkon.get(10));
         kalanKartSayisi.setText(String.valueOf(10 - t.kullanilanKartlar.size()));
-        //System.out.println(oyuncu1.kartListesi[0] + "\n" + oyuncu1.kartListesi[1] + "\n" + oyuncu1.kartListesi[2] + "\n");
-        //System.out.println(oyuncu2.kartListesi[0] + "\n" + oyuncu2.kartListesi[1] + "\n" + oyuncu2.kartListesi[2] + "\n");
-        //---------------------------------------------------------------------------//
-/*
-        timer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                time += 20;
-                surecKontrol.setValue(time);
-                if (surecKontrol.getValue() == 100) {
-                    System.out.println("batuhan");
-                    if (kullanici1Oynadi == true && kullanici2Oynadi == true) {
-                        if (t.kullanilanKartlar.size() < 9) {
-                            for (int i = 0; i < 3; i++) {
-                                if (oyuncu1.kartListesi[i][0].equalsIgnoreCase(" ")) {
-                                    t.yeniKart(t.kullanilanKartlar, t.pokemon, oyuncu1);
-                                }
-                                if (oyuncu2.kartListesi[i][0].equalsIgnoreCase(" ")) {
-                                    t.yeniKart(t.kullanilanKartlar, t.pokemon, oyuncu2);
-                                }
-                            }
-                        }
-                        kullanici1OrtaKart.setIcon(t.kartIkon.get(10));
-                        kullanici2OrtaKart.setIcon(t.kartIkon.get(10));
-                        kullanici1Kart0.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[0][1])));
-                        kullanici1Kart1.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[1][1])));
-                        kullanici1Kart2.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[2][1])));
-                        //ikonları set ettiğim yer.
-                        kullanici2Kart0.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[0][1])));
-                        kullanici2Kart1.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[1][1])));
-                        kullanici2Kart2.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[2][1])));
-                        if (hasar1 > hasar2) {
-                            skor1 += 5;
-                            kullanici1Skor.setText(String.valueOf(skor1));
-                        } else if (hasar1 < hasar2) {
-                            skor2 += 5;
-                            kullanici1Skor.setText(String.valueOf(skor2));
-                        }
-
-                        kalanKartSayisi.setText(String.valueOf(10 - t.kullanilanKartlar.size()));
-                        kullanici1Oynadi = false;
-                        kullanici2Oynadi = false;
-                    } else {
-
-                    }
-                }
-            }
-        });
-        timer.start();*/
     }
 
     /**
@@ -155,8 +107,6 @@ public class Batuhan extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        surecKontrol = new javax.swing.JProgressBar();
         raundNext = new javax.swing.JButton();
         kullanici1Ismi = new javax.swing.JLabel();
         kullanici2Ismi = new javax.swing.JLabel();
@@ -186,12 +136,7 @@ public class Batuhan extends javax.swing.JFrame{
         setTitle("Pokemon Kart Oyunu");
         setBounds(new java.awt.Rectangle(125, 0, 1920, 1080));
 
-        jLabel1.setText("SIRADAKİ RAUNT İÇİN KALAN SÜRE");
-
-        surecKontrol.setIndeterminate(true);
-        surecKontrol.setStringPainted(true);
-
-        raundNext.setText("ŞİMDİ GEÇ");
+        raundNext.setText("SIRADAKİ RAUNDA GEÇ");
         raundNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 raundNextActionPerformed(evt);
@@ -293,11 +238,12 @@ public class Batuhan extends javax.swing.JFrame{
             .addGap(0, 353, Short.MAX_VALUE)
         );
 
-        kalanKartIkon.setText("jLabel2");
+        kalanKartIkon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        kalanKartIkon.setText("DESTE");
 
         jLabel3.setText("KALAN KART:");
 
-        kalanKartSayisi.setText("jLabel2");
+        kalanKartSayisi.setText("4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -342,10 +288,6 @@ public class Batuhan extends javax.swing.JFrame{
                                     .addComponent(kullanici1Kart2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(kullanici1TextIsim, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(surecKontrol, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(raundNext)
                             .addContainerGap()))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -363,13 +305,8 @@ public class Batuhan extends javax.swing.JFrame{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(raundNext, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(surecKontrol, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 931, Short.MAX_VALUE)
+                        .addComponent(raundNext, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(kullanici2TextIsim, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -416,133 +353,136 @@ public class Batuhan extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void raundNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raundNextActionPerformed
-        if((oyuncu1.kartListesi[0][0].equals(" "))&&(oyuncu1.kartListesi[1][0].equals(" "))&&(oyuncu1.kartListesi[2][0].equals(" "))){
-            if (oyuncu1.getSkor() > oyuncu2.getSkor()) {
-                JOptionPane.showMessageDialog(null, "OYUN BİTTİ. "+oyuncu1.getOyuncuAdi()+" kazandı.");
-            }
-            if (oyuncu1.getSkor() < oyuncu2.getSkor()) {
-                JOptionPane.showMessageDialog(null, "OYUN BİTTİ. "+oyuncu2.getOyuncuAdi()+" kazandı.");
-            }
-            if (oyuncu1.getSkor() == oyuncu2.getSkor()) {
-                JOptionPane.showMessageDialog(null, "OYUN BERABERE BİTTİ");
-            }
-            System.exit(0);
-        }
-        int secilen1, secilen2;
-        if (String.valueOf(oyuncu1.getClass()).equals("class BilgisayarOyuncusu")) {
-            secilen1 = oyuncu1.kartSec(oyuncu1.kartListesi);
-            switch (secilen1) {
-                case 0: {
-                    kullanici1Kart0.setIcon(t.kartIkon.get(10));
-                    kullanici1OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[0][1])));
-                    kullanici1Oynadi = true;
-                    oyuncu1.kartListesi[0][0] = " ";
-                    hasar1 = t.pokemon.get(Integer.parseInt(oyuncu1.kartListesi[0][1])).hasarPuaniGoster();
-                    break;
-                    //set repat false
-                    
-                }
 
-                case 1: {
-                    kullanici1Kart1.setIcon(t.kartIkon.get(10));
-                    kullanici1OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[1][1])));
-                    kullanici1Oynadi = true;
-                    oyuncu1.kartListesi[1][0] = " ";
-                    hasar1 = t.pokemon.get(Integer.parseInt(oyuncu1.kartListesi[1][1])).hasarPuaniGoster();
-                    break;
+        if (kullanici1Oynadi || String.valueOf(oyuncu1.getClass()).equals("class BilgisayarOyuncusu")) {
+            if ((oyuncu1.kartListesi[0][0].equals(" ")) && (oyuncu1.kartListesi[1][0].equals(" ")) && (oyuncu1.kartListesi[2][0].equals(" "))) {
+                if (oyuncu1.getSkor() > oyuncu2.getSkor()) {
+                    JOptionPane.showMessageDialog(null, "OYUN BİTTİ. " + oyuncu1.getOyuncuAdi() + " kazandı.");
                 }
-
-                case 2: {
-                    kullanici1Kart2.setIcon(t.kartIkon.get(10));
-                    kullanici1OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[2][1])));
-                    kullanici1Oynadi = true;
-                    oyuncu1.kartListesi[2][0] = " ";
-                    hasar1 = t.pokemon.get(Integer.parseInt(oyuncu1.kartListesi[2][1])).hasarPuaniGoster();
-                    break;
+                if (oyuncu1.getSkor() < oyuncu2.getSkor()) {
+                    JOptionPane.showMessageDialog(null, "OYUN BİTTİ. " + oyuncu2.getOyuncuAdi() + " kazandı.");
                 }
+                if (oyuncu1.getSkor() == oyuncu2.getSkor()) {
+                    JOptionPane.showMessageDialog(null, "OYUN BERABERE BİTTİ");
+                }
+                System.exit(0);
             }
+            int secilen1, secilen2;
+            if (String.valueOf(oyuncu1.getClass()).equals("class BilgisayarOyuncusu")) {
+                secilen1 = oyuncu1.kartSec(oyuncu1.kartListesi);
+                switch (secilen1) {
+                    case 0: {
+                        kullanici1Kart0.setIcon(t.kartIkon.get(10));
+                        kullanici1OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[0][1])));
+                        kullanici1Oynadi = true;
+                        oyuncu1.kartListesi[0][0] = " ";
+                        hasar1 = t.pokemon.get(Integer.parseInt(oyuncu1.kartListesi[0][1])).hasarPuaniGoster();
+                        break;
+                        //set repat false
 
-        }
-        if (String.valueOf(oyuncu2.getClass()).equals("class BilgisayarOyuncusu")) {
-            secilen2 = oyuncu2.kartSec(oyuncu2.kartListesi);
-            switch (secilen2) {
-                case 0: {
-                    kullanici2Kart0.setIcon(t.kartIkon.get(10));
-                    kullanici2OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[0][1])));
-                    kullanici2Oynadi = true;
-                    oyuncu2.kartListesi[0][0] = " ";
-                    hasar2 = t.pokemon.get(Integer.parseInt(oyuncu2.kartListesi[0][1])).hasarPuaniGoster();
-                    break;
-                }
-
-                case 1: {
-                    kullanici2Kart1.setIcon(t.kartIkon.get(10));
-                    kullanici2OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[1][1])));
-                    kullanici2Oynadi = true;
-                    oyuncu2.kartListesi[1][0] = " ";
-                    hasar2 = t.pokemon.get(Integer.parseInt(oyuncu2.kartListesi[1][1])).hasarPuaniGoster();
-                    break;
-                }
-
-                case 2: {
-                    kullanici2Kart2.setIcon(t.kartIkon.get(10));
-                    kullanici2OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[2][1])));
-                    kullanici2Oynadi = true;
-                    oyuncu2.kartListesi[2][0] = " ";
-                    hasar2 = t.pokemon.get(Integer.parseInt(oyuncu2.kartListesi[2][1])).hasarPuaniGoster();
-                    break;
-                }
-            }
-        }
-        if (kullanici1Oynadi == true && kullanici2Oynadi == true) {
-            if (t.kullanilanKartlar.size() < 10) {
-                for (int i = 0; i < 3; i++) {
-                    if (oyuncu1.kartListesi[i][0].equalsIgnoreCase(" ")) {
-                        t.yeniKart(t.kullanilanKartlar, t.pokemon, oyuncu1);
                     }
-                    if (oyuncu2.kartListesi[i][0].equalsIgnoreCase(" ")) {
-                        t.yeniKart(t.kullanilanKartlar, t.pokemon, oyuncu2);
+
+                    case 1: {
+                        kullanici1Kart1.setIcon(t.kartIkon.get(10));
+                        kullanici1OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[1][1])));
+                        kullanici1Oynadi = true;
+                        oyuncu1.kartListesi[1][0] = " ";
+                        hasar1 = t.pokemon.get(Integer.parseInt(oyuncu1.kartListesi[1][1])).hasarPuaniGoster();
+                        break;
+                    }
+
+                    case 2: {
+                        kullanici1Kart2.setIcon(t.kartIkon.get(10));
+                        kullanici1OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[2][1])));
+                        kullanici1Oynadi = true;
+                        oyuncu1.kartListesi[2][0] = " ";
+                        hasar1 = t.pokemon.get(Integer.parseInt(oyuncu1.kartListesi[2][1])).hasarPuaniGoster();
+                        break;
+                    }
+                }
+
+            }
+            if (String.valueOf(oyuncu2.getClass()).equals("class BilgisayarOyuncusu")) {
+                secilen2 = oyuncu2.kartSec(oyuncu2.kartListesi);
+                switch (secilen2) {
+                    case 0: {
+                        kullanici2Kart0.setIcon(t.kartIkon.get(10));
+                        kullanici2OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[0][1])));
+                        kullanici2Oynadi = true;
+                        oyuncu2.kartListesi[0][0] = " ";
+                        hasar2 = t.pokemon.get(Integer.parseInt(oyuncu2.kartListesi[0][1])).hasarPuaniGoster();
+                        break;
+                    }
+
+                    case 1: {
+                        kullanici2Kart1.setIcon(t.kartIkon.get(10));
+                        kullanici2OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[1][1])));
+                        kullanici2Oynadi = true;
+                        oyuncu2.kartListesi[1][0] = " ";
+                        hasar2 = t.pokemon.get(Integer.parseInt(oyuncu2.kartListesi[1][1])).hasarPuaniGoster();
+                        break;
+                    }
+
+                    case 2: {
+                        kullanici2Kart2.setIcon(t.kartIkon.get(10));
+                        kullanici2OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[2][1])));
+                        kullanici2Oynadi = true;
+                        oyuncu2.kartListesi[2][0] = " ";
+                        hasar2 = t.pokemon.get(Integer.parseInt(oyuncu2.kartListesi[2][1])).hasarPuaniGoster();
+                        break;
                     }
                 }
             }
-            
-            //kullanici1OrtaKart.setIcon(t.kartIkon.get(10));
-            //kullanici2OrtaKart.setIcon(t.kartIkon.get(10));
-            if (!(oyuncu1.kartListesi[0][0].equals(" "))) {
-                kullanici1Kart0.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[0][1])));
-            }
-            if (!(oyuncu1.kartListesi[1][0].equals(" "))) {
-                kullanici1Kart1.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[1][1])));
-            }
-            if (!(oyuncu1.kartListesi[2][0].equals(" "))) {
-                kullanici1Kart2.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[2][1])));
-            }
-            //ikonları set ettiğim yer.
+            if (kullanici1Oynadi == true && kullanici2Oynadi == true) {
+                if (t.kullanilanKartlar.size() < 10) {
+                    for (int i = 0; i < 3; i++) {
+                        if (oyuncu1.kartListesi[i][0].equalsIgnoreCase(" ")) {
+                            t.yeniKart(t.kullanilanKartlar, t.pokemon, oyuncu1);
+                        }
+                        if (oyuncu2.kartListesi[i][0].equalsIgnoreCase(" ")) {
+                            t.yeniKart(t.kullanilanKartlar, t.pokemon, oyuncu2);
+                        }
+                    }
+                }
 
-            if (!(oyuncu2.kartListesi[0][0].equals(" "))) {
-                kullanici2Kart0.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[0][1])));
-            }
-            if (!(oyuncu2.kartListesi[1][0].equals(" "))) {
-                kullanici2Kart1.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[1][1])));
-            }
-            if (!(oyuncu2.kartListesi[2][0].equals(" "))) {
-                kullanici2Kart2.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[2][1])));
-            }
-            if (hasar1 > hasar2) {
-                oyuncu1.setSkor(5);
-            } else if (hasar1 < hasar2) {
-                oyuncu2.setSkor(5);
-            }
+                //kullanici1OrtaKart.setIcon(t.kartIkon.get(10));
+                //kullanici2OrtaKart.setIcon(t.kartIkon.get(10));
+                if (!(oyuncu1.kartListesi[0][0].equals(" "))) {
+                    kullanici1Kart0.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[0][1])));
+                }
+                if (!(oyuncu1.kartListesi[1][0].equals(" "))) {
+                    kullanici1Kart1.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[1][1])));
+                }
+                if (!(oyuncu1.kartListesi[2][0].equals(" "))) {
+                    kullanici1Kart2.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[2][1])));
+                }
+                //ikonları set ettiğim yer.
 
-            kullanici2Skor.setText(String.valueOf(oyuncu2.getSkor()));
-            kullanici1Skor.setText(String.valueOf(oyuncu1.getSkor()));
-            System.out.println("kullanici 1 skor:" + (String.valueOf(oyuncu1.getSkor())));
-            System.out.println("kullanici 2 skor:" + (String.valueOf(oyuncu2.getSkor())));
-            kalanKartSayisi.setText(String.valueOf(10 - t.kullanilanKartlar.size()));
-            kullanici1Oynadi = false;
-            kullanici2Oynadi = false;
-        } else {
+                if (!(oyuncu2.kartListesi[0][0].equals(" "))) {
+                    kullanici2Kart0.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[0][1])));
+                }
+                if (!(oyuncu2.kartListesi[1][0].equals(" "))) {
+                    kullanici2Kart1.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[1][1])));
+                }
+                if (!(oyuncu2.kartListesi[2][0].equals(" "))) {
+                    kullanici2Kart2.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu2.kartListesi[2][1])));
+                }
+                if (hasar1 > hasar2) {
+                    oyuncu1.setSkor(5);
+                } else if (hasar1 < hasar2) {
+                    oyuncu2.setSkor(5);
+                }
 
+                kullanici2Skor.setText(String.valueOf(oyuncu2.getSkor()));
+                kullanici1Skor.setText(String.valueOf(oyuncu1.getSkor()));
+                System.out.println("kullanici 1 skor:" + (String.valueOf(oyuncu1.getSkor())));
+                System.out.println("kullanici 2 skor:" + (String.valueOf(oyuncu2.getSkor())));
+                kalanKartSayisi.setText(String.valueOf(10 - t.kullanilanKartlar.size()));
+                kullanici1Oynadi = false;
+                kullanici2Oynadi = false;
+            } else {
+
+            }
         }
     }//GEN-LAST:event_raundNextActionPerformed
 
@@ -550,6 +490,7 @@ public class Batuhan extends javax.swing.JFrame{
      if (String.valueOf(oyuncu1.getClass()).equals("class InsanOyuncusu") && kullanici1Oynadi == false && !(oyuncu1.kartListesi[0][0].equals(" "))) {
          kullanici1Kart0.setIcon(t.kartIkon.get(10));
          kullanici1OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[0][1])));
+         kullanici2OrtaKart.setIcon(t.kartIkon.get(10));
          kullanici1Oynadi = true;
          oyuncu1.kartListesi[0][0] = " ";
          hasar1 = t.pokemon.get(Integer.parseInt(oyuncu1.kartListesi[0][1])).hasarPuaniGoster();
@@ -560,6 +501,7 @@ public class Batuhan extends javax.swing.JFrame{
             if (String.valueOf(oyuncu1.getClass()).equals("class InsanOyuncusu") && kullanici1Oynadi == false && !(oyuncu1.kartListesi[1][0].equals(" "))) {
                 kullanici1Kart1.setIcon(t.kartIkon.get(10));
                 kullanici1OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[1][1])));
+                kullanici2OrtaKart.setIcon(t.kartIkon.get(10));
                 kullanici1Oynadi = true;
                 oyuncu1.kartListesi[1][0] = " ";
                 hasar1 = t.pokemon.get(Integer.parseInt(oyuncu1.kartListesi[1][1])).hasarPuaniGoster();
@@ -572,6 +514,7 @@ public class Batuhan extends javax.swing.JFrame{
         if (String.valueOf(oyuncu1.getClass()).equals("class InsanOyuncusu") && kullanici1Oynadi == false && !(oyuncu1.kartListesi[2][0].equals(" "))) {
             kullanici1Kart2.setIcon(t.kartIkon.get(10));
             kullanici1OrtaKart.setIcon(t.kartIkon.get(Integer.parseInt(oyuncu1.kartListesi[2][1])));
+            kullanici2OrtaKart.setIcon(t.kartIkon.get(10));
             kullanici1Oynadi = true;
             oyuncu1.kartListesi[2][0] = " ";
             hasar1 = t.pokemon.get(Integer.parseInt(oyuncu1.kartListesi[2][1])).hasarPuaniGoster();
@@ -615,7 +558,6 @@ public class Batuhan extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -640,6 +582,5 @@ public class Batuhan extends javax.swing.JFrame{
     private javax.swing.JLabel kullanici2SkorIsmi;
     private javax.swing.JLabel kullanici2TextIsim;
     private javax.swing.JButton raundNext;
-    private javax.swing.JProgressBar surecKontrol;
     // End of variables declaration//GEN-END:variables
 }
